@@ -30,17 +30,24 @@ entry = st.text_input(label="Entry", value="Bokoblin")
 entry_status_code, entry_content = get_entry(pre_process(entry))
 
 if entry_status_code == 200:
-    st.subheader(entry_content["data"]["name"] + " (id:" + str(entry_content["data"]["id"]) + ")")
-    st.write("**Category** : " + str(entry_content["data"]["category"]))
-    st.write(entry_content["data"]["description"])
-    st.write(pd.DataFrame(entry_content["data"]["drops"], columns=["Drops"]))
+    if entry_content["data"] == {}:
+        st.write("No Results. Check for spelling or try another item")
+    else:
+        st.subheader(
+            entry_content["data"]["name"] + " (id:" + str(entry_content["data"]["id"]) + ")"
+        )
+        st.write("**Category** : " + str(entry_content["data"]["category"]))
+        st.write(entry_content["data"]["description"])
+        st.write(pd.DataFrame(entry_content["data"]["drops"], columns=["Drops"]))
 else:
     st.write("Error, This entry does not exists")
 
 # ------------------------------------------
 st.header("Browse by category")
 
-cat = st.radio("category", ["Treasure", "Monsters", "Equipment", "Materials", "Creatures"]).lower()
+cat = st.selectbox(
+    "category", ["Treasure", "Monsters", "Equipment", "Materials", "Creatures"]
+).lower()
 
 cat_status_code, cat_contents = get_category(pre_process(cat))
 
