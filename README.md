@@ -6,7 +6,7 @@ It uses [Streamlit](https://www.streamlit.io/) to quickly create a data app.
 
 ## Access the web app
 
-*Soon*
+The app is hosted on the Streamlit.io website. Here is the [link](https://share.streamlit.io/keith-maxwell/hyrulecompendium/main.py)
 
 ## Try it locally
 
